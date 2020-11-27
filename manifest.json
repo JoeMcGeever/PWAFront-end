@@ -1,0 +1,18 @@
+
+{
+	"name": "PWA",
+	"short_name": "Simple PWA",
+	"lang": "en-GB",
+	"start_url": "index.html",
+	"display": "standalone",
+	"background_color": "#005EB8",
+	"theme_color": "#005EB8",
+	"icons": [
+		{
+			"src": "icons/maskable_icon.png",
+			"type": "image/png",
+			"purpose": "any maskable",
+			"sizes": "72x72 96x96 120x120 128x128 144x144 152x152 180x180 192x192 256x256 384x384 512x512 1024x1024"
+		}
+	]
+}
