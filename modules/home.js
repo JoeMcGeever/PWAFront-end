@@ -3,12 +3,12 @@
 
 import { getCookie, login, showMessage } from '../js/core.js'
 
-const apiURL = 'https://arizona-spray-8080.codio-box.uk'
+const apiURL = 'https://short-panda-8080.codio-box.uk'
 
 export async function setup() {
 	try {
 		console.log('MAIN SCRIPT')
-		const url = `${apiURL}/accounts`
+		const url = `${apiURL}/v1/accounts`
 		console.log(url)
 		const json = await fetch(url)
 		const data = await json.json()

@@ -16,14 +16,11 @@ export function setup() {
 		window.location.href = '/#home'
 	}
 
-   
-        const
-      login = document.getElementById('login'),
-      register = document.getElementById('register'),
-      switchView = document.getElementById('switch')
-    login.addEventListener('click', async event => await login(event))
-    switchView.addEventListener('click', async event => await changeBox(event))
-    register.addEventListener('click', async event => await registerAccount(event))
+    
+    
+    document.getElementById('login').addEventListener('submit', async event => await login(event))
+    document.getElementById('register').addEventListener('submit', async event => await registerAccount(event))
+    document.getElementById('switch').addEventListener('submit', async event => await changeBox(event))
 
 }
 
@@ -32,17 +29,13 @@ async function changeBox() {
     if(isPageLogin){
         isPageLogin = false
         console.log("Now changing to register")
-        document.getElementById("loginForm").hidden = true
-        document.getElementById("registerForm").hidden = false
-        document.getElementById("switchText").innerHTML  = "Already have an account?"
-        document.getElementById("switch").innerHTML = "Login"
+        document.getElementById("login").hidden = true;
+        document.getElementById("registerAccount").hidden = false;
     } else {
         isPageLogin = true
         console.log("Now changing to login")
-        document.getElementById("loginForm").hidden = false
-        document.getElementById("registerForm").hidden = true
-        document.getElementById("switchText").innerHTML = "Need to register?"
-        document.getElementById("switch").innerHTML = "Sign up"
+        document.getElementById("login").hidden = false;
+        document.getElementById("registerAccount").hidden = true;
     }
 }
 
@@ -92,9 +85,3 @@ async function registerAccount(event) {
 		showMessage(err.message)
 	}
 }
-
-
-
-
-
-

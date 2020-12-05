@@ -31,7 +31,7 @@ async function loadPage() {
 		console.log('location updated')
 		// load the html page that matches the fragment and inject into the page DOM
 		document.querySelector('main').innerHTML = await (await fetch(`./views/${pageName}.html`)).text()
-		document.querySelector('h1').innerText = pageName
+		//document.querySelector('h1').innerText = pageName
 		console.log('---------------------------------------------------------------')
 		console.log(`${pageName.toUpperCase()}: ${window.location.protocol}//${window.location.host}/${window.location.hash}`)
 		if(getCookie('authorization')) console.log(`Authorization: "${getCookie('authorization')}"`)

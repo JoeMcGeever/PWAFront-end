@@ -4,7 +4,7 @@
 import { showMessage } from '../js/core.js'
 
 export async function setup() {
-	document.querySelector('h1').innerText = 'Register a New Account'
+	//document.querySelector('h1').innerText = 'Register a New Account'
 	document.querySelector('form').addEventListener('submit', await registerAccount)
 }
 
@@ -17,6 +17,7 @@ async function registerAccount(event) {
 		console.log(data)
 		const options = { method: 'post', body: JSON.stringify(data) }
 		const response = await fetch('/register',options)
+        //const response = await fetch('/v1/accounts/',options)
 		const json = await response.json()
 		if(response.status === 422) throw new Error(`422 Unprocessable Entity: ${json.msg}`)
 		window.location.href = '/#login'
