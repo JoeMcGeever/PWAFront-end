@@ -1,7 +1,7 @@
 
 /* login.js */
 
-import { generateToken, getCookie, setCookie, showMessage, getLocation } from '../js/core.js'
+import { generateToken, getCookie, setCookie, showMessage, getLocation, apiURL } from '../js/core.js'
 
 let isPageLogin = true
 
@@ -18,10 +18,10 @@ export function setup() {
 
    
         const
-      login = document.getElementById('login'),
+      loginElement = document.getElementById('login'),
       register = document.getElementById('register'),
       switchView = document.getElementById('switch')
-    login.addEventListener('click', async event => await login(event))
+    loginElement.addEventListener('click', async event => await login(event))
     switchView.addEventListener('click', async event => await changeBox(event))
     register.addEventListener('click', async event => await registerAccount(event))
 
@@ -60,13 +60,19 @@ async function login() {
 		const token = generateToken(data.user, data.pass)
 		console.log(token)
 		const options = { headers: { Authorization: token } }
-		const response = await fetch('/login',options)
-		const json = await response.json()
+        
+        //url for api
+        const url = `${apiURL}/v1/accounts/${data.user}`
+		const response = await fetch(url,options)
+        
+        
+        const json = await response.json()
 		console.log(json)
 		const status = response.status
 		console.log(`HTTP status code: ${response.status}`)
 		if(response.status === 401) throw new Error(json.msg)
 		if(response.status === 200) {
+            console.log("Logged In!")
 			setCookie('authorization', token, 1)
 			window.location.href = '#home'
 		}

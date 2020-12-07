@@ -13,6 +13,8 @@ import { getCookie, getLocation, onlineStatus } from './core.js'
 
 let geoID
 
+const apiURL = 'https://short-panda-8080.codio-box.uk'
+
 // event triggered when the page first loads, triggers the 'hashchange' event
 window.addEventListener('DOMContentLoaded', async event => {
 // 	geoID = await navigator.geolocation.watchPosition(getLocation)
@@ -38,8 +40,10 @@ async function loadPage() {
 		// dynamically importing the code module who's name matches the page name
 		try {
 			// run the setup function in whatever module has been loaded if module exists
-			const module = await import(`../modules/${pageName}.js`)
-			module.setup()
+            console.log(`trying to import:   ../modules/${pageName}.js`)
+			const module = await import(`../modules/${pageName}.js`)   
+            console.log('ready to call setup function')
+            module.setup()
 		} catch(err) {
 			console.warn('no page module')
 		}

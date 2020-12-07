@@ -1,9 +1,7 @@
 
 /* home.js */
 
-import { getCookie, login, showMessage } from '../js/core.js'
-
-const apiURL = 'https://short-panda-8080.codio-box.uk'
+import { getCookie, login, showMessage, apiURL} from '../js/core.js'
 
 export async function setup() {
 	try {
