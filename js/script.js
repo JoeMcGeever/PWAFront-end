@@ -13,8 +13,6 @@ import { getCookie, getLocation, onlineStatus } from './core.js'
 
 let geoID
 
-const apiURL = 'https://short-panda-8080.codio-box.uk'
-
 // event triggered when the page first loads, triggers the 'hashchange' event
 window.addEventListener('DOMContentLoaded', async event => {
 // 	geoID = await navigator.geolocation.watchPosition(getLocation)
@@ -46,6 +44,7 @@ async function loadPage() {
             module.setup()
 		} catch(err) {
 			console.warn('no page module')
+            console.log(err)
 		}
 	} catch(err) {
 		// errors are triggered if script can't find matching html fragment or script

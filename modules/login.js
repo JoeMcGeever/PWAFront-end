@@ -1,7 +1,6 @@
-
 /* login.js */
 
-import { generateToken, getCookie, setCookie, showMessage, getLocation, apiURL } from '../js/core.js'
+import { generateToken, getCookie, setCookie, deleteCookie, showMessage, getLocation, apiURL } from '../js/core.js'
 
 let isPageLogin = true
 
@@ -10,13 +9,17 @@ export function setup() {
 	if(getCookie('authorization')) {
 		console.log('logging out')
         //delete from session storage
+        document.getElementById("loginOut").innerHTML  = "Log in / Signup" //change the nav to logout
         navigator.geolocation.clearWatch(getCookie('geoID'))
         deleteCookie('authorization')
         deleteCookie('geoID')
+        deleteCookie('userID')
 		window.location.href = '/#home'
 	}
 
    
+     document.getElementById("footer").hidden = true //hide unnecessary footer
+    
         const
       loginElement = document.getElementById('login'),
       register = document.getElementById('register'),
@@ -59,23 +62,27 @@ async function login() {
 		})
 		const token = generateToken(data.user, data.pass)
 		console.log(token)
-		const options = { headers: { Authorization: token } }
-        
+		const options = { headers: { authorization: token}}
+
         //url for api
         const url = `${apiURL}/v1/accounts/${data.user}`
+        //console.log(`url = ${url}`)
 		const response = await fetch(url,options)
         
         
         const json = await response.json()
-		console.log(json)
+		console.log(json.userID)
 		const status = response.status
 		console.log(`HTTP status code: ${response.status}`)
-		if(response.status === 401) throw new Error(json.msg)
 		if(response.status === 200) {
             console.log("Logged In!")
+            document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
 			setCookie('authorization', token, 1)
+            setCookie('userID', json.userID, 1)
 			window.location.href = '#home'
-		}
+		} else {
+            throw new Error(json.err)
+        }
 	} catch(err) {
 		showMessage(err.message)
 	}
@@ -89,11 +96,25 @@ async function registerAccount(event) {
 		elements.forEach( el => { if(el.name) data[el.name] = el.value })
 		console.log(data)
 		const options = { method: 'post', body: JSON.stringify(data) }
-		const response = await fetch('/register',options)
-        //const response = await fetch('/v1/accounts/',options)
+        
+		 //url for api
+        const url = `${apiURL}/v1/accounts/`
+        //console.log(`url = ${url}`)
+		const response = await fetch(url,options)
+
 		const json = await response.json()
-		if(response.status === 422) throw new Error(`422 Unprocessable Entity: ${json.msg}`)
-		window.location.href = '/#login'
+        
+        console.log(typeof(json))
+        console.log(json)
+        console.log(json.status)
+        
+         if(response.status === 201) {
+             window.location.href = '/#home'
+         } else {
+             throw new Error(`${response.status}: ${json.err}`)
+         }
+         
+        
 	} catch(err) {
 		showMessage(err.message)
 	}

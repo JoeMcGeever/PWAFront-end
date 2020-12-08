@@ -1,20 +1,23 @@
 
 /* core.js */
 
+export const apiURL = 'https://short-panda-8080.codio-box.uk'
+
+
 export function generateToken(user, pass) {
 	const token = `${user}:${pass}`
 	const hash = btoa(token)
 	return `Basic ${hash}`
 }
 
-export async function login() {
-	if(!getCookie('authorization')) throw new Error('cookie not found')
-	const options = { headers: { Authorization: getCookie('authorization') } }
-	const response = await fetch('/login',options)
-	const status = response.status
-	console.log(`HTTP status code: ${status}`)
-	if(response.status === 401)  throw new Error('status 401 NOT AUTHORIZED')
-}
+// export async function login() {
+// 	if(!getCookie('authorization')) throw new Error('cookie not found')
+// 	const options = { headers: { Authorization: getCookie('authorization') } }
+// 	const response = await fetch('/login',options)
+// 	const status = response.status
+// 	console.log(`HTTP status code: ${status}`)
+// 	if(response.status === 401)  throw new Error('status 401 NOT AUTHORIZED')
+// }
 
 // from plainjs.com
 export function setCookie(name, value, days) {
