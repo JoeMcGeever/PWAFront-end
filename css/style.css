@@ -12,6 +12,10 @@
   line-height: 20px;
 }
 
+.error {
+  border:2px solid red;
+}
+
 /* .textarea[contenteditable]:empty::before {
   content: "What is the issue?";
   color: gray;

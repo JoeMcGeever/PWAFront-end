@@ -53,8 +53,28 @@ async function changeBox() {
 
 
 async function login() {
+    event.preventDefault()
+    //validation for forms:
+    let validation = false
+        
+    if(document.forms["loginForm"]["user"].value.length == 0){
+        document.forms["loginForm"]["user"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["loginForm"]["user"].style.borderColor=""
+    }
+    if(document.forms["loginForm"]["pass"].value.length == 0){
+        document.forms["loginForm"]["pass"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["loginForm"]["user"].style.borderColor=""
+    }
+    if(validation==true){
+        showMessage("Please fill in all of the details")
+        return
+    }
+    
 	try {
-		event.preventDefault()
 		const elements = [...document.forms['loginForm'].elements]
 		const data = {}
 		elements.forEach( el => {
@@ -66,12 +86,12 @@ async function login() {
 
         //url for api
         const url = `${apiURL}/v1/accounts/${data.user}`
-        //console.log(`url = ${url}`)
+        console.log(`url = ${url}`)
 		const response = await fetch(url,options)
         
         
         const json = await response.json()
-		console.log(json.userID)
+		console.log(json)
 		const status = response.status
 		console.log(`HTTP status code: ${response.status}`)
 		if(response.status === 200) {
@@ -90,6 +110,37 @@ async function login() {
 
 async function registerAccount(event) {
 	event.preventDefault()
+    //validation for forms:
+    let validation = false
+        
+    if(document.forms["registerForm"]["user"].value.length == 0){
+        document.forms["registerForm"]["user"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["registerForm"]["user"].style.borderColor=""
+    }
+    if(document.forms["registerForm"]["email"].value.length == 0){
+        document.forms["registerForm"]["email"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["registerForm"]["email"].style.borderColor=""
+    }
+    if(document.forms["registerForm"]["pass"].value.length == 0){
+        document.forms["registerForm"]["pass"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["registerForm"]["pass"].style.borderColor=""
+    }
+    if(document.forms["registerForm"]["location"].value.length == 0){
+        document.forms["registerForm"]["location"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["registerForm"]["location"].style.borderColor=""
+    }
+    if(validation==true){
+        showMessage("Please fill in all of the details")
+        return
+    }
 	try {
 		const elements = [...document.forms['registerForm'].elements]
 		const data = {}
