@@ -14,6 +14,7 @@ export function setup() {
         deleteCookie('authorization')
         deleteCookie('geoID')
         deleteCookie('userID')
+        deleteCookie('isCouncil')
 		window.location.href = '/#home'
 	}
 
@@ -99,6 +100,11 @@ async function login() {
             document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
 			setCookie('authorization', token, 1)
             setCookie('userID', json.userID, 1)
+            let isCookie = 'no'
+            if(json.isCouncil == 1){
+                isCookie = 'yes'
+            }
+            setCookie('isCouncil', isCookie, 1)
 			window.location.href = '#home'
 		} else {
             throw new Error(json.err)
@@ -145,7 +151,15 @@ async function registerAccount(event) {
 		const elements = [...document.forms['registerForm'].elements]
 		const data = {}
 		elements.forEach( el => { if(el.name) data[el.name] = el.value })
-		console.log(data)
+		
+        if(document.getElementById("isCouncil").checked == true){
+            data.isCouncil = true
+        } else {
+            data.isCouncil = false
+        }
+        
+        console.log(data)
+        
 		const options = { method: 'post', body: JSON.stringify(data) }
         
 		 //url for api

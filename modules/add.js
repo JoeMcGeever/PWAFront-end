@@ -2,6 +2,9 @@
 /* add.js */
 
 import { getCookie, showMessage, getLocation, apiURL } from '../js/core.js'
+//import fs from 'fs'
+//const fs = require('fs');
+
 
 export function setup() {
     if(getCookie('authorization')) {
@@ -23,12 +26,52 @@ export function setup() {
 }
 
 async function add(event) {
+    event.preventDefault()
+    let validation = false
+        
+    if(document.forms["addForm"]["title"].value.length == 0){
+        document.forms["addForm"]["title"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["addForm"]["title"].style.borderColor=""
+    }
+    if(document.forms["addForm"]["location"].value.length == 0){
+        document.forms["addForm"]["location"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["addForm"]["location"].style.borderColor=""
+    }
+    if(document.forms["addForm"]["description"].value.length == 0){
+        document.forms["addForm"]["description"].style.borderColor="red"
+        validation = true
+    } else {
+        document.forms["addForm"]["description"].style.borderColor=""
+    }
+    if(validation==true){
+        showMessage("Please fill in all of the required details")
+        return
+    }
+    
+    var postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i //reg expression for postcode format 
+    
+    if(!postcodeRegEx.test(document.forms["addForm"]["location"].value)){ //check if a valid postcode
+        document.forms["addForm"]["location"].style.borderColor="red"
+        showMessage("Please enter a valid uk postcode")
+        return
+    }
+    
+    
+    
 	try {
-		event.preventDefault()
 		const elements = [...document.forms['addForm'].elements]
 		const data = {}
+        let imageElement
 		elements.forEach( el => {
-			if(el.name) data[el.name] = el.value
+            if(el.name=='img') {
+                imageElement = el //skip over the image file for now
+            } else if(el.name){
+                data[el.name] = el.value
+            }
 		})
 		const token = getCookie('authorization')
         const userID = getCookie('userID')
@@ -36,12 +79,24 @@ async function add(event) {
         
         data['userID'] = userID //append the userID to the request
         
+        
+        //url for api
+        let url = `${apiURL}/v1/issue/`
+                
+        if(imageElement.value != ''){
+            console.log("1")
+            const base64EncodedFile = await encode(imageElement.files[0]) //encode it
+            console.log("3")
+            data['image'] = base64EncodedFile //add to data to be sent
+            console.log("4")
+            url = `${apiURL}/v2/issue/` //update the version of the URL we will be using (the one that allows image data to be sent)
+        }
+        
         console.log(data)
 
         const options = { headers: { authorization: token}, method: 'post', body: JSON.stringify(data) }
 
-        //url for api
-        const url = `${apiURL}/v1/issue/`
+
         //console.log(`url = ${url}`)
 		const response = await fetch(url,options)
         
@@ -60,3 +115,40 @@ async function add(event) {
 		showMessage(err.message)
 	}
 }
+
+
+// encodes file data to base64
+// function encode(file) {
+//     var bitmap = fs.readFileSync(file) // read as binary data
+//     return new Buffer(bitmap).toString('base64'); //convert the binary data to base64 string and return
+// }
+
+// encodes file data to base64
+// async function encode(file) {
+//        var reader = new FileReader()
+//        reader.readAsDataURL(file)
+//        reader.onload = function () {
+//            console.log("2")
+//            return reader.result
+//        }
+//        reader.onerror = function (error) {
+//            throw new Error(error)
+//        }
+// }
+
+
+// encodes file data to base64 -- returns a promise
+const encode = async(file) => {
+    return new Promise((resolve, reject) => {
+      var reader = new FileReader()
+       reader.readAsDataURL(file)
+       reader.onload = function () {
+           console.log("2")
+           resolve(reader.result)
+       }
+       reader.onerror = function (error) {
+           reject(error)
+       }
+})
+}
+                    

@@ -21,7 +21,11 @@
   color: gray;
 } */
 
-
+.imageSelect {
+    height: 60%;
+    max-width: 150%;
+    min-width: 100%;
+}
 
 body, h1, h2, h3, ul {
 	margin: 0;
