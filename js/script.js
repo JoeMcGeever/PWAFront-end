@@ -26,8 +26,27 @@ async function loadPage() {
 	try {
 		// the 'name' of the page is the name in the fragment without the # character
 		// if there is no fragment/hash, assume we want to load the home page (ternary operator)
+       
+        
 		console.log(typeof location.hash)
-		const pageName = location.hash ? location.hash.replace('#', '') : 'home'
+		let pageName = location.hash ? location.hash.replace('#', '') : 'home'
+        
+        
+        
+        
+        
+        //if page name has the issueID in it, extract and send to the setup file in issue.js
+        let issueID = null
+        try{ // extract the issueID if viewing an individual issue 
+            issueID = pageName.split('?Issue=')[1] // issueID is everything after the ?Issue=
+            pageName = pageName.split('?Issue=')[0] // the page name is everything before ?Issue=
+            console.log(`${issueID} is the ID, and the page name is ${pageName}`)
+        } catch {
+            console.log("Not going to the issue page")
+        }
+        
+        
+        
 		console.log('location updated')
 		// load the html page that matches the fragment and inject into the page DOM
 		document.querySelector('main').innerHTML = await (await fetch(`./views/${pageName}.html`)).text()
@@ -39,9 +58,12 @@ async function loadPage() {
 		try {
 			// run the setup function in whatever module has been loaded if module exists
             console.log(`trying to import:   ../modules/${pageName}.js`)
-			const module = await import(`../modules/${pageName}.js`)   
-            console.log('ready to call setup function')
-            module.setup()
+			const module = await import(`../modules/${pageName}.js`)
+            if(pageName == "issue"){
+                module.setup(issueID)
+            } else {
+                module.setup()
+            }
 		} catch(err) {
 			console.warn('no page module')
             console.log(err)

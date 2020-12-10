@@ -10,14 +10,12 @@ export function setup() {
     if(getCookie('authorization')) {
 		console.log('user is logged in')
         document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
-	}
-    document.getElementById("footer").hidden = true //hide unnecessary footer
-	const cookie = getCookie('authorization') //if the user is already logged in
-	if(getCookie('authorization')) {
-		console.log('logged in so is ok')
 	} else {
+        showMessage("You have to log in first")
         window.location.href = '/#login'
     }
+    document.getElementById("footer").hidden = true //hide unnecessary footer
+	const cookie = getCookie('authorization') //if the user is already logged in
 
     
     const addElement = document.getElementById('addIssue')
@@ -84,11 +82,11 @@ async function add(event) {
         let url = `${apiURL}/v1/issue/`
                 
         if(imageElement.value != ''){
-            console.log("1")
             const base64EncodedFile = await encode(imageElement.files[0]) //encode it
-            console.log("3")
             data['image'] = base64EncodedFile //add to data to be sent
-            console.log("4")
+            console.log(base64EncodedFile)
+//             data['image'] = "test"
+            
             url = `${apiURL}/v2/issue/` //update the version of the URL we will be using (the one that allows image data to be sent)
         }
         

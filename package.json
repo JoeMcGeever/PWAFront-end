@@ -1,0 +1,88 @@
+{
+  "name": "pwa",
+  "version": "1.0.0",
+  "description": "my pwa for my local community projetc",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@koa/cors": {
+      "version": "3.1.0",
+      "resolved": "https://registry.npmjs.org/@koa/cors/-/cors-3.1.0.tgz",
+      "integrity": "sha512-7ulRC1da/rBa6kj6P4g2aJfnET3z8Uf3SWu60cjbtxTA5g8lxRdX/Bd2P92EagGwwAhANeNw8T8if99rJliR6Q==",
+      "requires": {
+        "vary": "^1.1.2"
+      }
+    },
+    "amdefine": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz",
+      "integrity": "sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU="
+    },
+    "async": {
+      "version": "0.2.10",
+      "resolved": "https://registry.npmjs.org/async/-/async-0.2.10.tgz",
+      "integrity": "sha1-trvgsGdLnXGXCMo43owjfLUmw9E="
+    },
+    "optimist": {
+      "version": "0.3.7",
+      "resolved": "https://registry.npmjs.org/optimist/-/optimist-0.3.7.tgz",
+      "integrity": "sha1-yQlBrVnkJzMokjB00s8ufLxuwNk=",
+      "requires": {
+        "wordwrap": "~0.0.2"
+      }
+    },
+    "source-map": {
+      "version": "0.1.43",
+      "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.43.tgz",
+      "integrity": "sha1-wkvBRspRfBRx9drL4lcbK3+eM0Y=",
+      "requires": {
+        "amdefine": ">=0.0.4"
+      }
+    },
+    "std": {
+      "version": "0.1.40",
+      "resolved": "https://registry.npmjs.org/std/-/std-0.1.40.tgz",
+      "integrity": "sha1-Nnil9lCU2eG2teJu2/wCErg0K3E="
+    },
+    "uglify-js": {
+      "version": "2.3.0",
+      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.3.0.tgz",
+      "integrity": "sha1-LN7BbTeKiituz7aYl4TPi3rlSR8=",
+      "requires": {
+        "async": "~0.2.6",
+        "optimist": "~0.3.5",
+        "source-map": "~0.1.7"
+      }
+    },
+    "vary": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+      "integrity": "sha1-IpnwLG3tMNSllhsLn3RSShj2NPw="
+    },
+    "wordwrap": {
+      "version": "0.0.3",
+      "resolved": "https://registry.npmjs.org/wordwrap/-/wordwrap-0.0.3.tgz",
+      "integrity": "sha1-o9XabNXAvAAI03I0u68b7WMFkQc="
+    }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.coventry.ac.uk/7097CEM-2021/mcgeevej-pwa.git"
+  },
+  "keywords": [
+    "pwa",
+    "local_community"
+  ],
+  "author": "Joseph McGeever",
+  "license": "ISC"
+}

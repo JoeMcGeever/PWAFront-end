@@ -8,7 +8,8 @@ import https from 'https'
 const app = new Koa();
 app.use(cors());
 
-const port = 8080
+const defaultPort = 8080
+const port = process.env.PORT || defaultPort
 
 app.use(async ctx => {
   ctx.body = 'Hello World'
