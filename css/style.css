@@ -30,6 +30,47 @@ figure {
   box-shadow: 3px 3px 22px -7px rgba(0,0,0,0.75);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+.issues {
+  float: left;
+  width: 75%;
+
+  justify-content: space-evenly;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topTen {
+    margin-top: 1em;
+  float: left;
+  width: auto;
+  border-style: solid
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 h2, div {
   font-size: 1.4em;
   text-align: center;
@@ -92,7 +133,7 @@ header strong {
 	color: red;
 }
 
-main {
+main,{
 	padding: 1em;
     justify-content: space-evenly;
   display: flex;
@@ -123,6 +164,14 @@ ul {
 	background-color: rgba(19, 127, 221, 0.8);
 	/* height: 3em; */
 	justify-content: flex-start;
+}
+
+ol {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	align-items: center;
+	/* height: 3em; */
 }
 
 li {
@@ -247,6 +296,61 @@ article > button {
 	flex-grow: 1;
 	float: right;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
+
+
+
+
+
 
 footer {
 	position: fixed;

@@ -27,13 +27,14 @@ async function loadPage() {
 		// the 'name' of the page is the name in the fragment without the # character
 		// if there is no fragment/hash, assume we want to load the home page (ternary operator)
        
-        
 		console.log(typeof location.hash)
-		let pageName = location.hash ? location.hash.replace('#', '') : 'home'
+		let pageName = location.hash ? location.hash.replace('#', '') : 'home?page=1'
         
         
-        
-        
+        if(pageName == 'home'){ //if just loading onto the page, set page to be 1
+           pageName = 'home?page=1'
+        }
+       
         
         //if page name has the issueID in it, extract and send to the setup file in issue.js
         let issueID = null
@@ -45,6 +46,18 @@ async function loadPage() {
             console.log("Not going to the issue page")
         }
         
+        
+        //get page number for issue page and call the correct elements from the server
+        let pageNumber = null
+        try{ // extract the pageNumber if viewing an individual issue
+            console.log(pageName)
+            console.log(pageName.split('?page='))
+            pageNumber = pageName.split('?page=')[1] // issueID is everything after the ?Issue=
+            pageName = pageName.split('?page=')[0] // the page name is everything before ?Issue=
+            console.log(`${pageNumber} is the number, and the page name is ${pageName}`)
+        } catch {
+            console.log("First time at the page (so setup needs to setup footer)") //not specified a page, so if routing to the home page, use pageNumber = 1 instead
+        }
         
         
 		console.log('location updated')
@@ -59,8 +72,10 @@ async function loadPage() {
 			// run the setup function in whatever module has been loaded if module exists
             console.log(`trying to import:   ../modules/${pageName}.js`)
 			const module = await import(`../modules/${pageName}.js`)
-            if(pageName == "issue"){
+            if(pageName == 'issue'){
                 module.setup(issueID)
+            } else if(pageName == 'home'){
+                module.setup(pageNumber)
             } else {
                 module.setup()
             }

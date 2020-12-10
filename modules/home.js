@@ -4,7 +4,7 @@
 import { getCookie, showMessage, apiURL} from '../js/core.js'
 
 
-export async function setup() {
+export async function setup(pageNumber) {
 	if(getCookie('authorization')) {
 		console.log('user is logged in')
         document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
@@ -12,26 +12,46 @@ export async function setup() {
 	try {
         document.getElementById("footer").hidden = false //show footer again
 		console.log('MAIN SCRIPT')
-		let url = `${apiURL}/v1/issue/recent/1`
-		const json = await fetch(url)
-		const data = await json.json()
-		console.log(data)
+		let url = `${apiURL}/v1/issue/recent/${pageNumber}`
+		let json = await fetch(url)
+		let data = await json.json()
         await setupIssues(data)
         
-        url = `${apiURL}/v1/issue/all/total`
-        const json2= await fetch(url)
-		const numberOfIssues = await json2.json()
-        console.log(numberOfIssues)
+        url = `${apiURL}/v1/issue/all/total` //get total number of issues
+        json= await fetch(url)
+		const numberOfIssues = await json.json()
+        
+        url = `${apiURL}/v1/accounts/top10` //get top 10 users
+        json = await fetch(url)
+		const topTen = await json.json()
+        
         
         await setupFooter(numberOfIssues.numberOfIssues)
+        await setupTopTen(topTen.top10)
 // 		document.querySelector('main p').innerText = data.msg
 	} catch(err) {
 		console.log(err)
 	}
 }
 
+async function setupTopTen(topTen) {
+    
+  
+     const orderedList = document.getElementsByTagName('ol')[0] //gets the pagination class from index.html
+        
+    
+    console.log("havent loaded before")
+    
+     for (let user = 0; user < topTen.length; user++) {
+          var pageElement = document.createElement('p') //append li to the ol element
+          pageElement.innerHTML = `${topTen[user].username} : ${topTen[user].score}`
+          pageElement.class = 'topTenUser'
+          pageElement.style.display = "block"
+          orderedList.appendChild(pageElement)
+       }
+}
+
 async function setupIssues(data) { //sets up each of the issues 
-    console.log(data.issues)
     const issues = data.issues
     
     
@@ -72,7 +92,18 @@ async function setupIssues(data) { //sets up each of the issues
 
 
 async function setupFooter(numberOfIssues) {
-    numberOfIssues = 38
+    
+    //need to check if footer is already setup:
+    const paginationView = document.getElementsByClassName('pagination')[0] //gets the pagination class from index.html
+    
+    if(paginationView.childElementCount!=0){ //if there are elements present already
+        return //then return - footer is already setup
+    }
+    
+    
+    
+    
+    
     console.log(`total issue number = ${numberOfIssues}`)
     const elementsPerPage = 6 //change depending on screen size
     let numberOfPages = numberOfIssues/elementsPerPage
@@ -85,5 +116,25 @@ async function setupFooter(numberOfIssues) {
     }
     
     console.log(`total page number = ${numberOfPages}`)
+    
+    //set up the pagination footer
+    
+    
+                
+    for (var pageNumber = 0; pageNumber < numberOfPages; pageNumber++) {
+        var pageElement = document.createElement('a')
+            
+        var link = document.createTextNode(pageNumber + 1) //create the text node
+                  
+        // Append the text node to anchor element. 
+        pageElement.appendChild(link)
+            
+        pageElement.href = `#home?page=${pageNumber + 1}` //set the href
+        paginationView.appendChild(pageElement)
+    }
+        
+   
+    
+   
 }
 
