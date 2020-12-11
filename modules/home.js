@@ -37,15 +37,14 @@ export async function setup(pageNumber) {
 async function setupTopTen(topTen) {
     
   
-     const orderedList = document.getElementsByTagName('ol')[0] //gets the pagination class from index.html
+     const orderedList = document.getElementById('topTenList')//gets the list element 
         
-    
-    console.log("havent loaded before")
     
      for (let user = 0; user < topTen.length; user++) {
           var pageElement = document.createElement('p') //append li to the ol element
           pageElement.innerHTML = `${topTen[user].username} : ${topTen[user].score}`
           pageElement.class = 'topTenUser'
+          pageElement.name = 'topTenUser'
           pageElement.style.display = "block"
           orderedList.appendChild(pageElement)
        }
@@ -85,7 +84,7 @@ async function setupIssues(data) { //sets up each of the issues
         if(issues[issue].status == 'new') issueBox.children[2].style.color = 'red'
         else if (issues[issue].status == 'verified') issueBox.children[2].style.color = 'Coral'
         else if (issues[issue].status == 'assigned') issueBox.children[2].style.color = 'DarkOrange'
-        else if (issues[issue].status == 'resolved') issueBox.children[2].style.color = 'forestgreen'
+        else if (issues[issue].status == 'resolved' || issues[issue].status == 'Resolved by Council') issueBox.children[2].style.color = 'forestgreen'
         
     }
 }

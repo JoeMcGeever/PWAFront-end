@@ -2,6 +2,7 @@
 /* style.css */
 
 
+
 .textarea {
   display: block;
   width: 100%;
@@ -20,9 +21,16 @@
     cursor : pointer
 }
 
+.notHome{
+    margin: auto;
+    width: 500px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 figure {
   margin: 1em;
-  padding: 0;
+  padding: 1em;
   width: 300px;
   object-fit: cover;
   border-radius: 1em;
@@ -115,7 +123,6 @@ h1 {
 header {
 	width: 100%;
 	background-color: #CCC;
-	padding: 1em;
 	padding-bottom: 0.5em;
 }
 
@@ -141,11 +148,17 @@ main,{
 }
 
 footer {
-	position: absolute;
+/* 	position: absolute;
 	bottom: 0;
 	background-color: #DDD;
 	width: 100%;
-	padding: 0;
+	padding: 0; */
+    background: #ffab62;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 input {

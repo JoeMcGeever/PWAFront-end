@@ -15,7 +15,7 @@ export function setup() {
         deleteCookie('geoID')
         deleteCookie('userID')
         deleteCookie('isCouncil')
-		window.location.href = '/#home'
+		window.location.href = '/#login'
 	}
 
    

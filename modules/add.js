@@ -79,7 +79,7 @@ async function add(event) {
         
         
         //url for api
-        let url = `${apiURL}/v1/issue/`
+        let url = `${apiURL}/v1/issue`
                 
         if(imageElement.value != ''){
             const base64EncodedFile = await encode(imageElement.files[0]) //encode it
@@ -91,6 +91,7 @@ async function add(event) {
         }
         
         console.log(data)
+        console.log(url)
 
         const options = { headers: { authorization: token}, method: 'post', body: JSON.stringify(data) }
 
