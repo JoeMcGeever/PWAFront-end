@@ -1,7 +1,7 @@
 
 /* home.js */
 
-import { getCookie, showMessage, apiURL} from '../js/core.js'
+import { getCookie, showMessage, apiURL, getLocation, currentCoordinates} from '../js/core.js'
 
 
 export async function setup(pageNumber) {
@@ -10,12 +10,52 @@ export async function setup(pageNumber) {
         document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
 	}
 	try {
+                
+        
+        
+        
+        
+        
+        //council can see issues sorted by how close they are
+        
+        
+        if(getCookie('isCouncil')=='yes'){ 
+            console.log("is a council member")
+            console.log(currentCoordinates)
+            if(currentCoordinates!=null){ //if the location is available
+                document.getElementById("councilButton").style.display = 'block' //display the button
+                document.getElementById("councilButton").addEventListener('click', async event => await toggleView())
+            }
+        } else {
+            console.log("is not a council member")
+            document.getElementById("councilButton").style.display = 'none'
+        }
+        
+        
+        
+        
+        
+        
+        
         document.getElementById("footer").hidden = false //show footer again
 		console.log('MAIN SCRIPT')
-		let url = `${apiURL}/v1/issue/recent/${pageNumber}`
-		let json = await fetch(url)
-		let data = await json.json()
-        await setupIssues(data)
+        let url
+        let json
+        let data
+        if(document.getElementById("councilButton").textContent == 'View issues by recently added' && currentCoordinates[0]!=0){ //if on distance page
+            //url = `${apiURL}/v1/issue/distance/${pageNumber}` //set url to be distance
+            let url = `${apiURL}/v1/issue/distance/${pageNumber}/${currentCoordinates[0]}/${currentCoordinates[1]}`
+            json = await fetch(url)
+            data = await json.json()
+            await setupIssues(data)
+            
+        } else{
+            url = `${apiURL}/v1/issue/recent/${pageNumber}` //otherwise show recent
+            json = await fetch(url)
+            data = await json.json()
+            await setupIssues(data)
+        }
+
         
         url = `${apiURL}/v1/issue/all/total` //get total number of issues
         json= await fetch(url)
@@ -34,6 +74,48 @@ export async function setup(pageNumber) {
 	}
 }
 
+
+
+
+async function toggleView(){
+    const currentButton = document.getElementById("councilButton")
+    console.log(currentCoordinates)
+    if(currentButton.textContent == 'View issues closest to you'){ //then need to call api to setup the view for seeing issues closest to you
+        console.log("Now seeing closest to you")
+        
+        let url = `${apiURL}/v1/issue/distance/1/${currentCoordinates[0]}/${currentCoordinates[1]}`
+		let json = await fetch(url)
+		
+        let data = await json.json()
+        
+        if(json.status == 404){
+            showMessage('Unable to load resource')
+        } else{
+            
+            
+            console.log("Distance endpoint reached")
+            console.log(data)
+            
+            await setupIssues(data)
+        
+            currentButton.textContent = 'View issues by recently added'
+        }
+
+    } else {
+        console.log("Now seeing recently added")
+        
+        let url = `${apiURL}/v1/issue/recent/${1}`
+		let json = await fetch(url)
+		let data = await json.json()
+        await setupIssues(data)
+        
+        currentButton.textContent = 'View issues closest to you'
+    }
+}
+
+
+
+
 async function setupTopTen(topTen) {
     
   
@@ -50,13 +132,19 @@ async function setupTopTen(topTen) {
        }
 }
 
+
+
+
+
+
 async function setupIssues(data) { //sets up each of the issues 
     const issues = data.issues
     
+    console.log(issues)
     
     
     for (const issue in issues) {
-        //console.log(`${issue}: ${issues[issue].issueID}`)
+        console.log(`${issue}: ${issues[issue].issueID}`)
         
         const issueBox = document.getElementById(`issue${issue}`)
         
@@ -98,8 +186,6 @@ async function setupFooter(numberOfIssues) {
     if(paginationView.childElementCount!=0){ //if there are elements present already
         return //then return - footer is already setup
     }
-    
-    
     
     
     

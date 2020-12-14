@@ -50,15 +50,20 @@ export function showMessage(message) {
 	setTimeout( () => document.querySelector('aside').classList.add('hidden'), 2000)
 }
 
-export function getLocation() {
+export async function getLocation() {
 	if(navigator.geolocation) {
 		console.log('location supported')
-		navigator.geolocation.getCurrentPosition( position => {
+		const coordinates = await navigator.geolocation.getCurrentPosition( position => {
 			const pos = position.coords
-			const locString = `lat: ${pos.latitude}, lon: ${pos.longitude}`
-			document.getElementById('location').innerHTML = `${locString}<br />&nbsp;`
+			//const locString = `lat: ${pos.latitude}, lon: ${pos.longitude}`
+			//console.log(locString)
+            currentCoordinates = [pos.latitude, pos.longitude] //update the current coordinates
+            return [pos.latitude, pos.longitude]
 		})
 	} else {
 		console.log('geolocation not supported')
+        return null
 	}
 }
+
+export let currentCoordinates = [0.0, 0.0]

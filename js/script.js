@@ -15,7 +15,7 @@ let geoID
 
 // event triggered when the page first loads, triggers the 'hashchange' event
 window.addEventListener('DOMContentLoaded', async event => {
-// 	geoID = await navigator.geolocation.watchPosition(getLocation)
+	geoID = await navigator.geolocation.watchPosition(getLocation)
 	loadPage()
 })
 
