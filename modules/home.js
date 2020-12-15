@@ -10,11 +10,6 @@ export async function setup(pageNumber) {
         document.getElementById("loginOut").innerHTML  = "Logout" //change the nav to logout
 	}
 	try {
-                
-        
-        
-        
-        
         
         //council can see issues sorted by how close they are
         
@@ -33,7 +28,14 @@ export async function setup(pageNumber) {
         
         
         
-        
+        window.onscroll = function(ev) { //hides the footer if close to the bottom (so everthing displays correctly)
+    if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight-100) {
+         console.log("at bottom of page - hide the footer")
+        document.getElementById('footer').style.display = 'none'
+    } else {
+        document.getElementById('footer').style.display = 'block'
+    }
+}
         
         
         

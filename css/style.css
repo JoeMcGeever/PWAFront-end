@@ -121,15 +121,18 @@ h1 {
 }
 
 header {
-	width: 100%;
-	background-color: #CCC;
+	width:100%;
+    text-align:center;
+	background-color: red;
 	padding-bottom: 0.5em;
 }
 
-header p {
-	font-size: 0.9em;
-	color: #555;
-	margin: 0.2em;
+
+
+header > img {
+    display:inline-block;
+    margin: 0 auto;
+    width:40%
 }
 
 header strong {

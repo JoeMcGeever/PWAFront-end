@@ -20,7 +20,10 @@ export function setup() {
     
     const addElement = document.getElementById('addIssue')
     addElement.addEventListener('click', async event => await add(event))
-
+    
+    
+    
+    
 }
 
 async function add(event) {
