@@ -59,6 +59,8 @@ async function loadPage() {
             console.log("First time at the page (so setup needs to setup footer)") //not specified a page, so if routing to the home page, use pageNumber = 1 instead
         }
         
+        console.log(`API URL = ${apiURL}`)
+        
         
 		console.log('location updated')
 		// load the html page that matches the fragment and inject into the page DOM
