@@ -14,7 +14,7 @@ export function setup() {
         showMessage("You have to log in first")
         window.location.href = '/#login'
     }
-    document.getElementById("footer").hidden = true //hide unnecessary footer
+    document.getElementById('footer').style.display = 'none' //hide unnecessary footer
 	const cookie = getCookie('authorization') //if the user is already logged in
 
     

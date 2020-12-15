@@ -39,7 +39,7 @@ export async function setup(pageNumber) {
         
         
         
-        document.getElementById("footer").hidden = false //show footer again
+        document.getElementById('footer').style.display = 'block' //show footer again
 		console.log('MAIN SCRIPT')
         let url
         let json
