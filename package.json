@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server"
+      "start" : "http-server"
   },
   "dependencies": {
     "@koa/cors": {
@@ -73,9 +73,6 @@
     }
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.coventry.ac.uk/7097CEM-2021/mcgeevej-pwa.git"
