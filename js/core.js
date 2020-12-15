@@ -1,8 +1,8 @@
 
 /* core.js */
 
-export const apiURL = 'https://short-panda-8080.codio-box.uk'
-
+//export const apiURL = 'https://short-panda-8080.codio-box.uk'
+export const apiURL = 'https://calm-castle-89033.herokuapp.com'
 
 export function generateToken(user, pass) {
 	const token = `${user}:${pass}`
