@@ -1,5 +1,17 @@
 
-# Progressive Web App Template
+# Progressive Web App 
+
+--------------------
+This is my PWA for the local community project.
+
+A link to the live heroku server (note: due to image data being too large for my free heroku database - the heroku server will not save any images. However, the screen cast should show the image data being sent to the server and displayed accordingly)
+
+https://safe-tor-25899.herokuapp.com/#home
+
+
+-----------------------
+
+
 
 This code provides a working template for the development of modern Progressive Web App that needs to be connected to a running instance of the **Rest API Template**.
 
