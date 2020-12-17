@@ -36,10 +36,6 @@ h2, div {
   padding-bottom: 0.3em;
 }
 
-/* .textarea[contenteditable]:empty::before {
-  content: "What is the issue?";
-  color: gray;
-} */
 
 .imageSelect {
     height: 60%;
@@ -47,17 +43,32 @@ h2, div {
     min-width: 100%;
 }
 
-body, h1, h2, h3, ul {
+body, h1 h3, ul {
+   min-width:300px; 
 	margin: 0;
 	padding: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+/* background image */
+body {
+    background-image: url(../images/background.png);
+}
+/* background image */
+
+figure, .topTen {
+    background: white;
+}
+
 
 nav ul{
   list-style: none;
   margin: 0 2px;
   padding: 0;
   display: flex;
+    font-weight: bold;
   justify-content: space-around;
 }
 
@@ -396,13 +407,35 @@ footer > p#location {
     margin-top: 2em;
     margin-bottom: 2em;
 }
+    figure {
+  margin: auto;
+  padding: 1em;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 1em;
+  overflow: hidden;
+  box-shadow: 3px 3px 22px -7px rgba(0,0,0,0.75);
+    justify-content: space-evenly;
+  flex-wrap: wrap;
+}
     
     h1{
         font-size : 1.4em
     }
+    h2 {
+        font-size: 0.8em;
+    }
     p {
         font-size: 0.6em;
     }
+    
+    .topTen {
+        margin-top: 1em;
+        width: auto;
+        border-radius: 12em;
+        border-style: solid;
+    }
+    
 }
 
 /* Medium width screen --adjust the size */
@@ -413,23 +446,18 @@ footer > p#location {
 	}
     
     h1{
-        font-size : 2.4em
+        font-size : 2.4em;
     }
 
     
     .topTen {
         margin-top: 1em;
-        float: left;
         width: auto;
-        border-style: solid
+        border-radius: 12em;
+        border-style: solid;
     }
     
-/*     figure{
-    margin: auto;
-    width: 50%;
-    margin-top: 2em;
-    margin-bottom: 2em;
-} */
+
     
     
     
@@ -444,43 +472,21 @@ footer > p#location {
 figure {
   margin: auto;
   padding: 1em;
-  width: 300px;
-  min-height: 200px
+  width: 180px;
   object-fit: cover;
   border-radius: 1em;
   overflow: hidden;
   box-shadow: 3px 3px 22px -7px rgba(0,0,0,0.75);
     justify-content: space-evenly;
-  display: flex;
   flex-wrap: wrap;
 }
     
-.issues {
-  width: 300px;
-   margin: auto;
 
-  justify-content: space-evenly;
-  display: flex;
-  flex-wrap: wrap;
-}
     
     h2 {
-        margin: auto;
+        font-size: 1em;
     }
 
-.topTen {
-    margin-top: 1em;
-  
-  justify-content: space-evenly;
-  display: flex;
-  flex-wrap: wrap;
-  border-style: solid
-}
-    
-    
-    
-    
-    
     
     p {
         font-size: 0.8em;

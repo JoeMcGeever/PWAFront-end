@@ -29,7 +29,7 @@ export async function setup(pageNumber) {
         
         
         window.onscroll = function(ev) { //hides the footer if close to the bottom (so everthing displays correctly)
-    if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight-100) {
+    if ((window.innerHeight + window.pageYOffset) >= document.body.scrollHeight-75) {
          console.log("at bottom of page - hide the footer")
         document.getElementById('footer').style.display = 'none'
     } else {
@@ -37,6 +37,8 @@ export async function setup(pageNumber) {
     }
 }
         
+        
+               
         
         
         document.getElementById('footer').style.display = 'block' //show footer again
@@ -57,6 +59,11 @@ export async function setup(pageNumber) {
             data = await json.json()
             await setupIssues(data)
         }
+        
+//         window.addEventListener("resize", () => {//if the screen size changes
+//             console.log('screen size change')
+//             await setupIssues(data) //setup the issues data again (so hidden elements stay hidden)
+//         })
 
         
         url = `${apiURL}/v1/issue/all/total` //get total number of issues
