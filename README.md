@@ -2,7 +2,7 @@
 # Progressive Web App 
 
 --------------------
-This is my PWA for the local community project.
+This is my PWA for the local community project - Scoring 96% for my masters module: Modern Web Technologies
 
 A link to the live heroku server:
 
